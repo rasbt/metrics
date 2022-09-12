@@ -60,7 +60,8 @@ class MeanAbsoluteError(Metric):
             preds: Predictions from model
             target: Ground truth values
         """
-        sum_abs_error, n_obs = _mean_absolute_error_update(preds, target)
+        sum_abs_error, n_obs = _mean_absolute_error_update(
+            preds.to(torch.float32), target.to(torch.float32))
 
         self.sum_abs_error += sum_abs_error
         self.total += n_obs
